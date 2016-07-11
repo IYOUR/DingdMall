@@ -5,5 +5,5 @@
 
 ![img](phone.png 'preview') 
 
-![img](home.jpg 'preview')
+![img](home.png 'preview')
 
