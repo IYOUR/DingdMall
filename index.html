@@ -4,52 +4,28 @@
   <title>叮咚Mall</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/loading.css">
   <link rel="stylesheet" href="css/foundation.min.css">
+  <link rel="stylesheet" type="text/css" href="css/index.css">
   <script src="js/jquery.min.js"></script>
   <script src="js/foundation.min.js"></script>
-  <script src="js/modernizr.js"></script>
+  <script type="text/javascript" src="js/swiper/index.js"></script>
+  <script type="text/javascript" src="js/swiper/swiper-2.1.min.js"></script>
   <style>
-  .panel {
-    width:100%;
-    height:100%;
-    background: #f2f2f2;
-    padding: 0;
-    border:none;
-    border-radius: 5%;
-    overflow: hidden;
-    transition-duration: 0.5s;
-  }
-  .panel:hover{
-    -webkit-box-shadow:0px 0px 15px #333333; 
-    box-shadow:0px 0px 15px #333333;
-    margin-top: -5px;
-    cursor:pointer;
-  }
-  .goods_text{
-    padding-top: 5px;
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-bottom: 0;
-  }
-  @media screen and (min-width: 600px) {
- #content{
-  width: 90%;
-  height:100%;
-  margin: 7% auto;
- }
-}
-@media screen and (max-width: 600px) {
-#content{
-  width: 100%;
-  height:100%;
-  margin: 7% auto;
- }
-}
-
+  .row{max-width: 100%;}
+  .panel {width:100%;background: #f2f2f2;padding: 0; border:none;border-radius: 5%;overflow: hidden;transition-duration: 0.5s;}
+  .panel:hover{-webkit-box-shadow:0px 0px 15px #333333; box-shadow:0px 0px 15px #333333; margin-top: -5px;}
+  .goods_text{ padding-top: 5px;padding-left: 15px;padding-right: 15px;padding-bottom: 0;cursor:pointer;font-family: Microsoft Yahei;}
+  h5{font-family: Microsoft Yahei;}
+  @media screen and (min-width: 600px) {#content{width: 90%;height:100%;margin: 7% auto;}}
+  @media screen and (max-width: 600px) {#content{width: 100%;height:100%;margin: 7% auto;}}
  </style>
 </head>
 <body>
-
+  <div id="loading">
+    <div class="spinner1"><div class="double-bounce1"></div><div class="double-bounce2"></div></div>
+  </div>
+<div class="row">
 <div class="fixed">
 <nav id="nav" class="top-bar" data-topbar>
   <ul class="title-area">
@@ -72,31 +48,32 @@
   </section>
 </nav>
 </div>
-<div class="banner">
-    <picture>
-    <source srcset="images/banner-small.png" media="(max-width: 650px)">
-    <img src="images/banner-max.png" alt="Flowers" style="max-width:100%;">
-    </picture>
+<div class="swiper-container">
+    <div class="swiper-wrapper" id="swiper-wrapper">
+        <div class="swiper-slide"><a href="#"><img src="images/slide/slide1.png" alt=""></a></div>
+        <div class="swiper-slide"><a href="#"><img src="images/slide/slide2.png" alt=""></a></div>
+        <div class="swiper-slide"><a href="#"><img src="images/slide/slide3.png" alt=""></a></div>
+    </div>
+    <div class="pagination"></div>
 </div>
+<div>
+<ul id="content" class="small-block-grid-2 medium-block-grid-3 large-block-grid-4"></ul>
 
-<ul id="content" class="small-block-grid-2 medium-block-grid-3 large-block-grid-4">
-
-</ul>
-
-<div id="button" style="width: 90%;margin:0 auto;visibility: visible;">
- <button id="more_button" type="button" class="button expand">加载更多</button>
+<div style="width: 90%;margin:0 auto;position: relative;top:-50px;">
+ <button id="more_button" type="button" class="button expand" style="display: block;">加载更多</button>
+ <button id="disabled_button" type="button" class="button expand disabled" style="display: none;">已无更多加载</button>
 </div>
-<div id="alert" data-alert class="alert-box alert" style="width: 90%;height:10%;margin: 0 auto;display: none;">
-      <p style="text-align: center;">已无更多加载!</p>
 </div>
 
 <div class="bottom" style="width: 100%;height:4em;background: #333;position: relative;top: 5%;">
     <p style="color: #fff;font-size: 12px;text-align: center;padding: 1em;margin-bottom:0;">Copyright 2015-2016 www.DingdMall.com 叮咚Mall All Rights Reserved</p> 
   </div>
+  </div>
 <script>
 
 $(document).ready(function() {
     $(document).foundation();
+
 $.more_load();
 $("#more_button").click(function(){
       $.more_load();
@@ -120,14 +97,16 @@ $("#more_button").click(function(){
           console.log(last);
       }  
          else{
-          $("#button").css("visibility","hidden");
-          $("#alert").css("display","block");
+           $("#more_button").css("display", "none");
+          $("#disabled_button").css("display", "block");
          
          }
     });
 
   }});
-
+  $(window).load(function(){
+    $("#loading").css("display", "none");
+  });
 </script>
 
 </body>
